@@ -59,7 +59,7 @@ export default function Course() {
 
       <div className="mx-auto my-auto w-full h-full max-w-7xl ">
         <h1 className="mt-10 text-center font-bold text-2xl text-zinc-400 text-gray-900">UNDERGRADUATE COURSE</h1>
-        <div className="mx-auto  mx-20 grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto  mx-20 grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 mx-5">
           {SITEMAP.map(({ title, links }, key) => (
             <div key={key} className="w-full">
               <Typography
@@ -88,7 +88,7 @@ export default function Course() {
 
       <div className=" mx-auto my-auto w-full h-full max-w-7xl ">
         <h1 className="mt-10 text-center font-bold text-2xl text-zinc-400 text-gray-900">POSTGRADUATE COURSE</h1>
-        <div className="mx-auto mx-20 grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mx-20 grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 mx-5">
           {SITEMAPS.map(({ titles, link }, key) => (
             <div key={key} className="w-full">
               <Typography

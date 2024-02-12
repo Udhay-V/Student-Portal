@@ -35,7 +35,7 @@ export default function Home() {
                     Founded on the ideals of <em>inclusivity, diversity</em> and <em>collaboration</em>, the University of London is a pioneering institution committed to increasing access to <em>education</em>, championing <em>research excellence</em> and delivering <em>social good</em>.
                 </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 my-20 mx-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-20 mx-10">
 
                 <Card className="content-start max-w-[24rem] overflow-hidden">
                     <CardHeader
