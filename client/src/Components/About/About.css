@@ -1,0 +1,16 @@
+.para_1 {
+    margin-top: 2rem;
+    
+    font-family: freight-display-pro,Times New Roman;
+    font-size: 1.5rem;
+    /* font-weight: 600; */
+    line-height: 1.25;
+    --tw-text-opacity: 1;
+    /* color: rgb(27 21 62 / var(--tw-text-opacity)); */
+    color:#263238;
+    margin-bottom: 2rem;
+}
+.head_1{
+    font-family: freight-display-pro,Times New Roman;
+
+}
