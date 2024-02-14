@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 
 import React, { useEffect, useState } from "react";
-
+import secureLocalStorage from 'react-secure-storage'
 import { Typography } from "@material-tailwind/react";
 import {
     Tabs,
@@ -23,14 +23,15 @@ import {
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import server from "../Server";
-import Manufacture from "../Books/Manufacturing.pdf";
-import Principle from "../Books/Principlesofmanagement.pdf";
+import Manufacture from "../Books/MECH/Manufacturing.pdf"
+import Principle from "../Books/MECH/Principlesofmanagement.pdf";
 import student from "../../assets/image/student.jpg";
+import Environmetal from "../Books/EEE/EVS.pdf";
+import Science from "../Books/CSE/EVS.pdf";
 
 export default function Student({ studdetails, setstuddetails }) {
 
     const navigate = useNavigate();
-    const books = [{ Book: Manufacture, Bookname: "Manufacturing Technology", Authorname: "Gupta", Sl_no: 1 }, { Book: Principle, Bookname: "Principle of Management", Authorname: "", Sl_no: 1 }]
 
     useEffect(() => {
         const prev = async () => {
@@ -53,10 +54,35 @@ export default function Student({ studdetails, setstuddetails }) {
     // eslint-disable-next-line no-unused-vars
     const [currentCard, setCurrentCard] = useState(0);
 
-    const regno = sessionStorage.getItem("registerNumber");
-    const name = sessionStorage.getItem("Name");
-    const branch = sessionStorage.getItem("Branch");
-    const dob = sessionStorage.getItem("dob");
+    const regno = secureLocalStorage.getItem("registerNumber");
+    const name = secureLocalStorage.getItem("Name");
+    const branch = secureLocalStorage.getItem("Branch");
+    const dob = secureLocalStorage.getItem("dob");
+    const Books =
+        branch === "MECH"
+            ? [
+                { Book: Manufacture, Bookname: "Manufacturing Technology", Authorname: "Gupta", Sl_no: 1 },
+                { Book: Principle, Bookname: "Principle of Management", Authorname: "", Sl_no: 2 },
+                { Book: Science, Bookname: "Environmental Science", Authorname: "", Sl_no: 3 }
+            ]
+            : branch === "CSE"
+                ? [
+                    { Book: Science, Bookname: "Environmental Science", Authorname: "", Sl_no: 1 }
+                ]
+                : branch === "EEE"
+                    ? [
+                        { Book: Environmetal, Bookname: "Environmental Science", Authorname: "", Sl_no: 1 }
+                    ]
+                    : branch === "ECE"
+                        ? [
+                            { Book: Environmetal, Bookname: "Environmental Science", Authorname: "", Sl_no: 1 }
+                        ]
+                        : branch === "CIVIL"
+                            ? [
+                                { Book: Environmetal, Bookname: "Environmental Science", Authorname: "", Sl_no: 1 }
+                            ]
+                            : [];
+
 
     // eslint-disable-next-line no-unused-vars
     const [register, SetRegister] = useState({
@@ -259,11 +285,10 @@ export default function Student({ studdetails, setstuddetails }) {
                                     <Card className="py-10 rounded-none">
                                         <CardHeader color="amber" className="py-5 text-center text-2xl">Assessment</CardHeader>
 
-                                        <CardBody>{studdetails[0] && studdetails[1].Accessment !== '' ?
+                                        <CardBody>{studdetails[1] && studdetails[1].Accessment !== '' ?
                                             <table className="w-full min-w-max table-auto text-left">
                                                 <thead>
                                                     <tr>
-
                                                         <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                                                             <Typography
                                                                 variant="small"
@@ -294,7 +319,7 @@ export default function Student({ studdetails, setstuddetails }) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {studdetails[0] && studdetails[1].Access.map((item, index) => (
+                                                    {studdetails[1] && studdetails[1].Access.map((item, index) => (
                                                         <tr key={index} className="even:bg-blue-gray-50/50">
                                                             <td className="p-4">
                                                                 <Typography variant="small" color="blue-gray" className="font-normal">
@@ -323,7 +348,7 @@ export default function Student({ studdetails, setstuddetails }) {
                                         <CardHeader color="amber" className="py-5 text-center text-2xl">Exam Result</CardHeader>
 
                                         <CardBody>
-                                            {studdetails[0] && studdetails[2].Result !== '' ?
+                                            {studdetails[2] && studdetails[2].Result !== '' ?
                                                 <table className="w-full min-w-max table-auto text-left">
                                                     <thead>
                                                         <tr>
@@ -357,7 +382,7 @@ export default function Student({ studdetails, setstuddetails }) {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {studdetails[0] && studdetails[2].Subjects.map((item, index) => (
+                                                        {studdetails[2] && studdetails[2].Subjects.map((item, index) => (
                                                             <tr key={index} className="even:bg-blue-gray-50/50">
                                                                 <td className="p-4">
                                                                     <Typography variant="small" color="blue-gray" className="font-normal">
@@ -386,7 +411,7 @@ export default function Student({ studdetails, setstuddetails }) {
                                     <Card className="py-10 rounded-none" >
                                         <CardHeader color="amber" className="py-5 text-center text-2xl">Books
                                         </CardHeader>
-                                        {books.map((item, index) => (
+                                        {Books.map((item, index) => (
 
                                             <CardBody>
 

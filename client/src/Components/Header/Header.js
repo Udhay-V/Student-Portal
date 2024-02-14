@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 import {
   Navbar,
   MobileNav,
@@ -37,11 +38,11 @@ export default function Head({ studdetails, setstuddetails }) {
           console.log(res.data)
           if (res.data[1] === 'success') {
             setOpen((prevOpen) => !prevOpen)
-            setstuddetails({ Schedule: res.data[2] === null ? '' : res.data[2], Accessment: res.data[3] === null ? '' : res.data[3], Result: res.data[4] === null ? '' : res.data[4] })
-            sessionStorage.setItem('registerNumber', register.RegisterNumber)
-            sessionStorage.setItem('dob', register.DateofBirth)
-            sessionStorage.setItem('Name', res.data[0].Name)
-            sessionStorage.setItem('Branch', res.data[0].Branch)
+            setstuddetails([res.data[2] === null ? '' : res.data[2], res.data[3] === null ? '' : res.data[3], res.data[4] === null ? '' : res.data[4]])
+            secureLocalStorage.setItem('registerNumber', register.RegisterNumber)
+            secureLocalStorage.setItem('dob', register.DateofBirth)
+            secureLocalStorage.setItem('Name', res.data[0].Name)
+            secureLocalStorage.setItem('Branch', res.data[0].Branch)
             navigate('/student')
             SetRegister('')
           }
@@ -55,7 +56,7 @@ export default function Head({ studdetails, setstuddetails }) {
     }
 
   }
-
+  console.log(studdetails)
   const [openNav, setOpenNav] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((prevOpen) => !prevOpen);
@@ -75,7 +76,7 @@ export default function Head({ studdetails, setstuddetails }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/courses" className="flex items-center hover:text-red-500 transition-colors">
+        <a href="/courses" className="flex items-center hover:text-amber-500 transition-colors">
           Course
         </a>
       </Typography>
@@ -85,7 +86,7 @@ export default function Head({ studdetails, setstuddetails }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/study" className="flex items-center hover:text-red-500 transition-colors">
+        <a href="/study" className="flex items-center hover:text-amber-500 transition-colors">
           Study
         </a>
       </Typography>
@@ -95,7 +96,7 @@ export default function Head({ studdetails, setstuddetails }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="//" onClick={(e) => { e.preventDefault(); handleOpen(); }} className="flex items-center hover:text-red-500 transition-colors">
+        <a href="//" onClick={(e) => { e.preventDefault(); handleOpen(); }} className="flex items-center hover:text-amber-500 transition-colors">
           Student
         </a>
       </Typography>
@@ -105,7 +106,7 @@ export default function Head({ studdetails, setstuddetails }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/about" className="flex items-center hover:text-red-500 transition-colors">
+        <a href="/about" className="flex items-center hover:text-amber-500 transition-colors">
           About us
         </a>
       </Typography>
@@ -218,7 +219,7 @@ export default function Head({ studdetails, setstuddetails }) {
             <Typography
               className="mb-3 font-normal text-center"
               variant="paragraph"
-              color="gray"
+              color="amber"
             >
               Enter your Register Number and Date of Birth to Login.
             </Typography>
@@ -234,7 +235,7 @@ export default function Head({ studdetails, setstuddetails }) {
                 }));
               }}
             />
-            <span>{!valid ? "Register Number is Invalid" : ''}</span>
+            <span className="text-red-500">{!valid ? "Register Number is Invalid" : ''}</span>
             <Typography className="-mb-2" variant="h6">
               Date of Birth [DD-MM-YYYY]
             </Typography>
@@ -244,6 +245,7 @@ export default function Head({ studdetails, setstuddetails }) {
                 DateofBirth: e.target.value,
               }));
             }} />
+            <span className="text-red-500">{!valid ? "DOB is Invalid" : ''}</span>
 
           </CardBody>
           <CardFooter className="pt-0">

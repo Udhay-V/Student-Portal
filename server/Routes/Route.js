@@ -17,26 +17,22 @@ router.post('/login', async (req, res) => {
     const collection_3 = student.collection("Result")
     const { RegisterNumber, DateofBirth } = req.body
 
-    const data = await Stud.findOne({ Register: RegisterNumber, Date: DateofBirth })
-
-    const Schedule = await collection_1.findOne({
-        RegisterNumber: RegisterNumber
-    })
-    const Accessment = await collection_2.findOne({
-        RegisterNumber: RegisterNumber
-    })
-    const Result = await collection_3.findOne({
-        RegisterNumber: RegisterNumber
-
-    })
-    if (data === null) {
-        res.json([data, "fail", Schedule, Accessment, Result])
-    } else {
+    const data = await Stud.findOne({ Register: RegisterNumber, Date:new Date(DateofBirth)  })
+    console.log(data)
+    if (data !== null) {
+        const Schedule = await collection_1.findOne({
+            RegisterNumber: RegisterNumber
+        })
+        const Accessment = await collection_2.findOne({
+            RegisterNumber: RegisterNumber
+        })
+        const Result = await collection_3.findOne({
+            RegisterNumber: RegisterNumber
+        })
         res.json([data, "success", Schedule, Accessment, Result])
+    } else {
+        res.json([data, "fail"])
     }
-
-
-
 })
 
 
